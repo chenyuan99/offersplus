@@ -2,10 +2,12 @@ from django.db import models
 from django.contrib.auth.models import User
 from django.utils import timezone
 
-
 # Create your models here.
+from tracks.identifiers import MY_CHOICES
+
+
 class ApplicationRecord(models.Model):
-    outcome = models.TextField(blank=True)
+    outcome = models.TextField(choices=MY_CHOICES)
     job_title = models.TextField(blank=True)
     company_name = models.TextField()
     application_link = models.TextField(blank=True)
