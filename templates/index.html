@@ -1,0 +1,50 @@
+{% extends "base.html" %}
+{% load static %}
+{% block content %}
+	<!-- </nav> -->
+	<div class="container ">
+
+		<table id="info-table" class="table table-hover">
+			<thead>
+            <tr>
+                <th> Outcome</th>
+
+                <th> Job Title</th>
+
+                <th> Company Name</th>
+            </tr>
+			</thead>
+
+			<tbody>
+
+			{% for item in items %}
+                <td>
+                <span class="badge text-bg-primary">
+                    {{ item.outcome}}
+                    </span>
+                </td>
+
+                <td>
+                    {{ item.job_title}}
+                </td>
+
+                <td>
+                    {{ item.company_name}}
+                </td>
+
+
+
+
+			{% endfor %}
+
+			</tbody>
+
+		</table>
+		</div>
+		<br>
+		<br>
+		<br>
+
+	</div>
+
+{% endblock %}
