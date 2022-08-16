@@ -11,6 +11,7 @@ https://docs.djangoproject.com/en/3.2/ref/settings/
 """
 
 from pathlib import Path
+import django_heroku
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -72,10 +73,27 @@ WSGI_APPLICATION = 'offer_plus.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/3.2/ref/settings/#databases
 
+# DATABASES = {
+#     'default': {
+#         'ENGINE': 'django.db.backends.sqlite3',
+#         'NAME': BASE_DIR / 'db.sqlite3',
+#     }
+# }
+
+
+
+
+# Database
+# https://docs.djangoproject.com/en/2.0/ref/settings/#databases
+
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+        'ENGINE': 'django.db.backends.postgresql',
+        'NAME': 'd1at8e37tu06n',
+        'USER': 'xyreuopibhsvwq',
+        'PASSWORD': '2a8665afd14b7531b0813ec66359d37e28d82f85d3b92f5d8f98061fc899b1fe',
+        'HOST': 'ec2-100-26-39-41.compute-1.amazonaws.com',
+        'PORT': '5432',
     }
 }
 
@@ -119,3 +137,4 @@ STATIC_URL = '/static/'
 # https://docs.djangoproject.com/en/3.2/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+django_heroku.settings(locals())

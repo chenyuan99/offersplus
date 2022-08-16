@@ -10,4 +10,5 @@ pytz
 sqlparse
 pymysql
 django-redis
+psycopg2-binary==2.8.6
 uWSGI
