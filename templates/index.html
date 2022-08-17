@@ -20,9 +20,22 @@
 			{% for item in items %}
                 <tr>
                 <td>
+
+                    {% if "REJECT" in item.outcome %}
+
+                        <span class="badge text-bg-danger">
+                    {{ item.outcome}}
+                    </span>
+
+
+                    {% else %}
+
                 <span class="badge text-bg-primary">
                     {{ item.outcome}}
                     </span>
+
+
+                    {% endif %}
                 </td>
 
                 <td>
