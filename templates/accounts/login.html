@@ -1,0 +1,25 @@
+{% extends "base.html" %}
+{% block title %}登录{% endblock %}
+{% block content %}
+<div class="jumbotron text-center">
+    <div class="clear"></div>
+    <div class="container">
+        <h1>登录</h1>
+    </div>
+</div>
+<div class="center">
+    <form action="/login/" method="post">
+        {% csrf_token %}
+        {% for field in form %}
+        <div class="form-group {% if field.errors %}has-error{% endif %}">
+            {{ field.label_tag }}
+            {{ field }}
+            {% if field.errors %}
+            <div class="help-block">{{ field.errors }}</div>
+            {% endif %}
+        </div>
+        {% endfor %}
+        <button type="submit" class="btn btn-primary">登录</button>
+    </form>
+</div>
+{% endblock %}

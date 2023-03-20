@@ -1,0 +1,35 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="jumbotron text-center">
+    <div class="clear"></div>
+    <div class="container">
+        <h1>注册</h1>
+    </div>
+</div>
+{% if messages %}
+{% for message in messages %}
+{% if message.tags == 'success'%}
+<script>M.toast({ html: "{{message}}", classes: 'green rounded', displayLength: 2000 });</script>
+{% elif message.tags == 'info'%}
+<script>M.toast({ html: "{{message}}", classes: 'blue rounded', displayLength: 2000 });</script>
+{% elif message.tags == 'warning'%}
+<script>M.toast({ html: "{{message}}", classes: 'orange rounded', displayLength: 10000 });</script>
+{% elif message.tags == 'error'%}
+<script>M.toast({ html: "{{message}}", classes: 'red rounded', displayLength: 10000 });</script>
+{% endif %}
+{% endfor %}
+{% endif %}
+<div class="container">
+    <br>
+    <form method="POST">
+        {% csrf_token %}
+        {{form.as_p}}
+        <button class="btn btn-outline-info" type="submit">提交</button>
+    </form>
+</div>
+<div class="container text-center">
+    你有账号哦！在这里 <a href="/login" target="blank"><strong>登录</strong></a>.
+</div>
+<div class="clear"></div>
+{% endblock %}

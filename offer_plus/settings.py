@@ -37,6 +37,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'accounts'
 ]
 
 MIDDLEWARE = [
@@ -81,18 +82,16 @@ WSGI_APPLICATION = 'offer_plus.wsgi.application'
 # }
 
 
-
-
 # Database
 # https://docs.djangoproject.com/en/2.0/ref/settings/#databases
 
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'd1at8e37tu06n',
-        'USER': 'xyreuopibhsvwq',
-        'PASSWORD': '2a8665afd14b7531b0813ec66359d37e28d82f85d3b92f5d8f98061fc899b1fe',
-        'HOST': 'ec2-100-26-39-41.compute-1.amazonaws.com',
+        'NAME': 'd3eil865medq6v',
+        'USER': 'wwvlrhvdvjhwfx',
+        'PASSWORD': 'c51d2b5e923703a128888c644814a06e8030c8e5162f615d74fa812fd18fa294',
+        'HOST': 'ec2-3-234-131-8.compute-1.amazonaws.com',
         'PORT': '5432',
     }
 }

@@ -6,6 +6,10 @@ from tracks.models import ApplicationRecord
 
 
 def index(request):
+
+    if not request.user.is_authenticated:
+        return render(request, 'accounts/login.html')
+
     items = ApplicationRecord.objects.all()
     # myFilter = facultyFilter(request.GET, queryset=items)
     # items = myFilter.qs
