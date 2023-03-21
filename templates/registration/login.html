@@ -13,7 +13,15 @@
         <h2>Log In</h2>
         <form method="post">
             {% csrf_token %}
-            {{ form|crispy }}
+            {% for field in form %}
+                <div class="form-group {% if field.errors %}has-error{% endif %}">
+                    {{ field.label_tag }}
+                    {{ field }}
+                    {% if field.errors %}
+                        <div class="help-block">{{ field.errors }}</div>
+                    {% endif %}
+                </div>
+            {% endfor %}
             <button class="btn btn-outline-info" type="submit">Log In</button>
         </form>
     </div>
