@@ -6,11 +6,11 @@ from tracks.models import ApplicationRecord
 
 
 def index(request):
-
     if not request.user.is_authenticated:
-        return render(request, 'accounts/login.html')
+        return redirect('login')
 
-    items = ApplicationRecord.objects.all()
+    items = ApplicationRecord.objects.filter(applicant__username=request.user.username)
+    for item in items: print((item.applicant.username,request.user.username))
     # myFilter = facultyFilter(request.GET, queryset=items)
     # items = myFilter.qs
     context = {

@@ -1,0 +1,20 @@
+{% extends "base.html" %}
+{% block title %}登录{% endblock %}
+{% load crispy_forms_filters %}
+{% block content %}
+    {% load crispy_forms_tags %}
+    <div class="jumbotron text-center">
+        <div class="clear"></div>
+        <div class="container">
+            <h1>登录</h1>
+        </div>
+    </div>
+    <div class="container center">
+        <h2>Log In</h2>
+        <form method="post">
+            {% csrf_token %}
+            {{ form|crispy }}
+            <button class="btn btn-outline-info" type="submit">Log In</button>
+        </form>
+    </div>
+{% endblock %}
