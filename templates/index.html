@@ -11,6 +11,7 @@
                 <th> Job Title</th>
                 <th> Company</th>
                 <th> Link</th>
+                <th> Manage</th>
             </tr>
             </thead>
 
@@ -47,12 +48,24 @@
 
                     <td>
                         <a href=
-                                   {{ item.application_link }}
+                                   {{ item.application_link }} type="button" class="btn btn-outline-primary btn-sm"
                         >
 
                             View
                         </a>
                     </td>
+
+                    <td>
+                        <a href=
+                                   ""
+                           type="button" class="btn btn-outline-info btn-sm">
+
+                            Edit
+                        </a>
+                        <a href=
+                                   "" type="button" class="btn btn-outline-danger btn-sm">
+                            Delete
+                        </a>
 
                 </tr>
 

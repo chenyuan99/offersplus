@@ -20,7 +20,7 @@
         <br>
         <form method="POST">
             {% csrf_token %}
-            {{ form|crispy }}
+            {{ form|crispy:"bootstrap" }}
             <button class="btn btn-outline-info" type="submit">Sign Up</button>
         </form>
     </div>

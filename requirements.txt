@@ -4,9 +4,8 @@ pytz
 django-heroku
 gunicorn
 django-import-export
-django-crispy-forms
+django-crispy-forms==1.14
 django-filter
-pytz
 sqlparse
 pymysql
 django-redis

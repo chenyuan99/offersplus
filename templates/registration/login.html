@@ -3,25 +3,11 @@
 {% load crispy_forms_filters %}
 {% block content %}
     {% load crispy_forms_tags %}
-    <div class="jumbotron text-center">
-        <div class="clear"></div>
-        <div class="container">
-            <h1>登录</h1>
-        </div>
-    </div>
-    <div class="container center">
+    <div class="container text-center">
         <h2>Log In</h2>
         <form method="post">
             {% csrf_token %}
-            {% for field in form %}
-                <div class="form-group {% if field.errors %}has-error{% endif %}">
-                    {{ field.label_tag }}
-                    {{ field }}
-                    {% if field.errors %}
-                        <div class="help-block">{{ field.errors }}</div>
-                    {% endif %}
-                </div>
-            {% endfor %}
+            {{ form|crispy }}
             <button class="btn btn-outline-info" type="submit">Log In</button>
         </form>
     </div>

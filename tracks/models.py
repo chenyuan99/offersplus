@@ -16,7 +16,8 @@ class ApplicationRecord(models.Model):
     VO_date = models.DateTimeField(null=True, blank=True)
     created = models.DateTimeField(default=timezone.now)
     updated = models.DateTimeField(auto_now=True)
-    applicant = models.ForeignKey(settings.AUTH_USER_MODEL, to_field='username', default='cyuan8', on_delete=models.CASCADE)
+    applicant = models.ForeignKey(settings.AUTH_USER_MODEL, to_field='username', default='cyuan8',
+                                  on_delete=models.CASCADE)
 
     class Meta:
         ordering = ('-created',)
