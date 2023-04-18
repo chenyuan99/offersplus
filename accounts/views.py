@@ -34,3 +34,8 @@ def register(request):
     return render(request=request,
                   template_name="accounts/register.html",
                   context={"form": form})
+
+
+# Create your views here.
+def display_profile(request):
+    return render(request, "registration/profile.html")
