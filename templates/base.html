@@ -36,26 +36,34 @@
 </head>
 
 <body>
-<div class="collapse navbar-collapse" id="navbarText">
-</div>
-<nav class="navbar navbar-expand-sm mb-3s">
+<nav class="navbar navbar-expand-lg bg-body-tertiary">
     <div class="container">
-        <div>
-            <a class="navbar-brand " href="/">
-                <span style="color:#861F41;">Offer Plus</span></a>
-        </div>
-        <div class="collapse navbar-collapse">
-            <ul class="navbar-nav">
+        <a class="navbar-brand " href="/">
+            <span style="color:#861F41;">Offer Plus</span>
+        </a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
+                aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav ms-auto">
                 {% if user.is_authenticated %}
-                    <li class="nav-item"><a class="btn btn-outline-secondary btn-sm"
-                                            href="/account">{{ user.username|title }}</a></li>
-                    <li class="nav-item"><a href="{% url 'logout' %}" type="button"
-                                            class="btn btn-outline-danger btn-sm">登出</a></li>
+                    <li class="nav-item">
+                        <a class="nav-link"
+                           href="{% url 'jobgpt' %}">jobGPT</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link"
+                           href="{% url 'profile' %}">{{ user.username|title }}</a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="{% url 'logout' %}" type="button"
+                           class="btn btn-outline-danger btn-sm">登出</a>
+                    </li>
                 {% else %}
-                    <li class="nav-item"><a href="{% url 'login' %}" type="button"
-                                            class="btn btn-outline-success btn-sm">Log In</a></li>
-                    <li class="nav-item"><a href="{% url 'register' %}" type=" button"
-                                            class="btn btn-outline-info btn-sm">Register</a></li>
+                    <li class="nav-item"><a href="{% url 'login' %}" class="nav-link">Log In</a></li>
+                    <li class="nav-item"><a href="{% url 'register' %}"
+                                            class="nav-link">Register</a></li>
                 {% endif %}
             </ul>
         </div>

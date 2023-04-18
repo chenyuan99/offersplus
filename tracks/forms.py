@@ -6,5 +6,4 @@ from tracks.models import ApplicationRecord
 class ApplicationRecordForm(ModelForm):
     class Meta:
         model = ApplicationRecord
-
-    fields = ['pub_date', 'headline', 'content', 'reporter']
+        fields = ['outcome', 'job_title', 'company_name', 'application_link']
