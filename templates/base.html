@@ -53,12 +53,12 @@
                            href="{% url 'jobgpt' %}">jobGPT</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link"
+                        <a class="btn btn-light"
                            href="{% url 'profile' %}">{{ user.username|title }}</a>
                     </li>
                     <li class="nav-item">
-                        <a href="{% url 'logout' %}" type="button"
-                           class="btn btn-outline-danger btn-sm">登出</a>
+                        <a href="{% url 'logout' %}"
+                           class="btn btn-outline-danger">登出</a>
                     </li>
                 {% else %}
                     <li class="nav-item"><a href="{% url 'login' %}" class="nav-link">Log In</a></li>

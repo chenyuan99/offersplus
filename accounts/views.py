@@ -38,4 +38,6 @@ def register(request):
 
 # Create your views here.
 def display_profile(request):
-    return render(request, "registration/profile.html")
+    context = {"user": request.user}
+    print(context)
+    return render(request, "registration/profile.html", context)
