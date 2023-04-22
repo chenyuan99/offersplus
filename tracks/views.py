@@ -57,3 +57,7 @@ def edit_application(request, id):
         else:
             messages.error(request, 'Please correct the following errors:')
             return render(request, 'tracks/application-record.html', {'form': form})
+
+
+def hardware(request):
+    return render(request, 'hardware.html')

@@ -11,3 +11,4 @@ pymysql
 django-redis
 psycopg2-binary
 openai
+django-storages
