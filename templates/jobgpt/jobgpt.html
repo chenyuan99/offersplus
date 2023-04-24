@@ -16,18 +16,34 @@
         <p>3. The recommended jobs will be displayed.</p>
 
         <h2>Input</h2>
-        <textarea type="text" class="form-control"></textarea>
-        <button class="btn btn-default">Run</button>
-
-        <h2>Generated Prompt</h2>
-
-        <textarea type="textfield" class="form-control"></textarea>
-        <button class="btn btn-default">Edit</button>
-        <button class="btn btn-default">Run</button>
+        <textarea type="text" class="form-control" id="prompt"></textarea>
+        <button class="btn btn-default" id="prompt-generator">Run</button>
 
         <h2>Generated Third person Recommendation</h2>
 
-        <textarea type="text" class="form-control"></textarea>
+        <textarea type="text" class="form-control" id="generated-prompt"></textarea>
     </div>
+    <script>
+        $(document).ready(function () {
+            $("#prompt-generator").click(function () {
+                var prompt = $("#prompt").val();
+                console.log(prompt);
+                $.ajax({
+                    type: "POST",
+                    url: "prompt",
+                    data: {
+                        'prompt': prompt,
+                        'csrfmiddlewaretoken': '{{ csrf_token }}'
+                    },
+                    success: function (data) {
+                        $("#generated-prompt").val(data["prompt"]);
+
+                        console.log(data["prompt"]);
+                    }
+                });
+            });
+        });
+
+    </script>
 
 {% endblock %}
