@@ -1,4 +1,7 @@
+import logging
+
 from django.contrib.auth.mixins import LoginRequiredMixin
+from django.core.exceptions import PermissionDenied
 from django.http import HttpResponse
 from django.shortcuts import render, redirect, get_object_or_404
 from django.urls import reverse_lazy
@@ -7,7 +10,7 @@ from django.contrib import messages
 
 from tracks.forms import ApplicationRecordForm
 # Create your views here.
-from tracks.models import ApplicationRecord
+from tracks.models import ApplicationRecord, Company
 
 
 def index(request):
@@ -48,9 +51,10 @@ def edit_application(request, id):
         context = {'form': ApplicationRecordForm(instance=post), 'id': id}
         return render(request, 'tracks/application-record.html', context)
 
-    elif request.method == 'POST':
+    if request.method == 'POST':
         form = ApplicationRecordForm(request.POST, instance=post)
         if form.is_valid():
+            form.applicant = request.user.username
             form.save()
             messages.success(request, 'The post has been updated successfully.')
             return redirect('posts')
@@ -61,3 +65,30 @@ def edit_application(request, id):
 
 def hardware(request):
     return render(request, 'hardware.html')
+
+
+# -------------------------add-----------------------------------
+def add_application(request):
+    if not request.user.is_authenticated:
+        raise PermissionDenied
+    if request.method == 'POST':
+        form = ApplicationRecordForm(request.POST, hide_condition=True)
+        print(request)
+        print(form)
+
+        if form.is_valid():
+            form.applicant = request.user.username
+            print(form)
+            form.save()
+            return redirect('index')
+
+    else:
+        form = ApplicationRecordForm(hide_condition=True)
+        form.initial['applicant'] = request.user.username
+        return render(request, 'add_new.html', {'form': form})
+
+
+def companies(request):
+    companies = Company.objects.all()
+    context = { "companies": companies }
+    return render(request, 'companies.html',context)
