@@ -24,3 +24,18 @@ class ApplicationRecord(models.Model):
 
     def __str__(self):
         return " ".join([self.job_title, self.company_name, self.outcome])
+
+
+class Company(models.Model):
+    name = models.TextField()
+    industry = models.TextField(blank=True)
+    logo = models.ImageField(upload_to='company_logo', blank=True)
+    created = models.DateTimeField(default=timezone.now)
+    updated = models.DateTimeField(auto_now=True)
+    description = models.TextField(blank=True)
+
+    class Meta:
+        ordering = ('-created',)
+
+    def __str__(self):
+        return self.name
