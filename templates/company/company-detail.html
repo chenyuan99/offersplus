@@ -1,13 +1,11 @@
 {% extends "base.html" %}
 {% load static %}
 {% block content %}
-    <!-- </nav> -->
     <div class="container ">
+        <nav><h1>{{ company }}</h1></nav>
         <div class="row">
             <div class="col-md-12">
                 <a href="{% url 'add-application' %}" class="btn btn-outline-primary">Add New Record</a>
-                <a href="{% url 'hardware' %}" class="btn btn-outline-info">Hardware Jobs</a>
-                <a href="https://icc.fyi" class="btn btn-outline-info">IT Consulting Jobs</a>
             </div>
         </div>
         <table id="info-table" class="table table-hover">
@@ -49,11 +47,7 @@
                     </td>
 
                     <td>
-                        <a href= "{% url 'company-detail' item.company_name %}">
-
                         {{ item.company_name }}
-
-                            </a>
                     </td>
 
                     <td>

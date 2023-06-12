@@ -33,7 +33,7 @@ def index(request):
 class ApplicationRecordView(LoginRequiredMixin, FormView):
     template_name = 'tracks/application-record.html'
     form_class = ApplicationRecordForm
-    success_url = reverse_lazy('assessment:success')
+    success_url = reverse_lazy('tracks:success')
 
 
 class ApplicationRecordSuccessView(LoginRequiredMixin, TemplateView):
