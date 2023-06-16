@@ -147,3 +147,33 @@ CRISPY_TEMPLATE_PACK = "bootstrap4"
 
 LOGIN_REDIRECT_URL = "/"
 LOGOUT_REDIRECT_URL = "/"
+
+
+# logging
+
+# Create a LOGGING dictionary
+LOGGING = {
+    # Use v1 of the logging config schema
+    'version': 1,
+    # Continue to use existing loggers
+    'disable_existing_loggers': False,
+    # Create a log handler that prints logs to the terminal
+    'handlers': {
+        'console': {
+            'class': 'logging.StreamHandler',
+        },
+    },
+    # Define the root logger's settings
+    'root': {
+        'handlers': ['console'],
+        'level': 'INFO',
+    },
+    # Define the django log module's settings
+    'loggers': {
+        'django': {
+            'handlers': ['console'],
+            'level': os.getenv('DJANGO_LOG_LEVEL', 'INFO'),
+            'propagate': False,
+        },
+    },
+}

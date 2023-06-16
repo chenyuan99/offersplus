@@ -18,7 +18,7 @@ def index(request):
         return redirect('login')
 
     items = ApplicationRecord.objects.filter(applicant__username=request.user.username)
-    for item in items: print((item.applicant.username, request.user.username))
+    # for item in items: print((item.applicant.username, request.user.username))
     # myFilter = facultyFilter(request.GET, queryset=items)
     # items = myFilter.qs
     context = {
@@ -43,10 +43,6 @@ class ApplicationRecordSuccessView(LoginRequiredMixin, TemplateView):
 def edit_application(request, id):
     post = get_object_or_404(ApplicationRecord, id=id)
 
-    # if request.method == 'GET':
-    #     context = {'form': ApplicationRecordForm(instance=post), 'id': id}
-    #     return render(request, 'blog/post_form.html', context)
-
     if request.method == 'GET':
         context = {'form': ApplicationRecordForm(instance=post), 'id': id}
         return render(request, 'tracks/application-record.html', context)
@@ -57,7 +53,7 @@ def edit_application(request, id):
             form.applicant = request.user.username
             form.save()
             messages.success(request, 'The post has been updated successfully.')
-            return redirect('posts')
+            return redirect('index')
         else:
             messages.error(request, 'Please correct the following errors:')
             return render(request, 'tracks/application-record.html', {'form': form})
@@ -73,12 +69,10 @@ def add_application(request):
         raise PermissionDenied
     if request.method == 'POST':
         form = ApplicationRecordForm(request.POST, hide_condition=True)
-        print(request)
-        print(form)
 
         if form.is_valid():
             form.applicant = request.user.username
-            print(form)
+            logging.info(form)
             form.save()
             return redirect('index')
 

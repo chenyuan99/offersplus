@@ -1,3 +1,5 @@
+import logging
+
 from django.shortcuts import render, redirect
 
 # Create your views here.
@@ -16,7 +18,7 @@ def display_company(request, company_name):
     if not request.user.is_authenticated:
         return redirect('login')
 
-    print(company_name)
+    logging.info(company_name)
     items = ApplicationRecord.objects.filter(company_name=company_name)
     for item in items: print((item.applicant.username, request.user.username))
     # myFilter = facultyFilter(request.GET, queryset=items)
