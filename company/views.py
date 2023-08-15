@@ -29,3 +29,7 @@ def display_company(request, company_name):
         # 'myFilter': myFilter,
     }
     return render(request, 'company/company-detail.html', context)
+
+
+def display_grace_hopper(request):
+    return render(request, 'company/grace-hopper.html')
