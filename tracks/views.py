@@ -86,3 +86,8 @@ def companies(request):
     companies = Company.objects.all()
     context = { "companies": companies }
     return render(request, 'companies.html',context)
+
+def yuanc(request):
+    companies = Company.objects.all()
+    context = { "companies": companies }
+    return render(request, 'yuanc.html',context)
