@@ -1,8 +1,7 @@
-{% extends "base.html" %}
+{% extends "dashboard.html" %}
 {% load static %}
 {% block content %}
-    <!-- </nav> -->
-    <div class="container ">
+    <div class="container-fluid">
         <div class="row">
             <div class="col-md-12">
                 <a href="{% url 'add-application' %}" class="btn btn-outline-primary">Add New Record</a>
@@ -49,11 +48,11 @@
                     </td>
 
                     <td>
-                        <a href= "{% url 'company-detail' item.company_name %}">
+                        <a href="{% url 'company-detail' item.company_name %}">
 
-                        {{ item.company_name }}
+                            {{ item.company_name }}
 
-                            </a>
+                        </a>
                     </td>
 
                     <td>
@@ -86,9 +85,5 @@
 
         </table>
     </div>
-    <br>
-    <br>
-    <br>
-
 
 {% endblock %}
