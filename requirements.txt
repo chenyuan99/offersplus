@@ -7,7 +7,7 @@ certifi==2023.5.7
 charset-normalizer==3.1.0
 defusedxml==0.7.1
 diff-match-patch==20230430
-Django==4.2.2
+django>=4.2.11
 django-crispy-forms==1.14.0
 django-filter==23.2
 django-import-export==3.2.0
