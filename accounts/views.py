@@ -1,3 +1,5 @@
+import logging
+
 from django.contrib import messages
 from django.contrib.auth import logout, login
 from django.contrib.auth.forms import UserCreationForm
@@ -26,7 +28,7 @@ def register(request):
             return redirect("index")
         else:
             for msg in form.error_messages:
-                print(form.error_messages[msg])
+                logging.INFO(form.error_messages[msg])
             return render(request=request,
                           template_name="accounts/register.html",
                           context={"form": form})
@@ -39,5 +41,5 @@ def register(request):
 # Create your views here.
 def display_profile(request):
     context = {"user": request.user}
-    print(context)
+    logging.info(context)
     return render(request, "registration/profile.html", context)

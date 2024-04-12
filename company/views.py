@@ -78,5 +78,5 @@ def display_internships(request):
 def display_newgrads(request):
     with urllib.request.urlopen("http://maps.googleapis.com/maps/api/geocode/json?address=google") as url:
         data = json.load(url)
-        print(data)
+        logging.info(data)
     return render(request, 'company/grace-hopper.html')

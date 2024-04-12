@@ -12,5 +12,5 @@ def generate_response(prompt: str) -> str:
             {"role": "user", "content": prompt}
         ])
     result = completion.choices[0].message.content
-    print(f"Generated response: {result}")
+    logging.info(f"Generated response: {result}")
     return result
