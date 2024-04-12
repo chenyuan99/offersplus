@@ -2,6 +2,7 @@ import logging
 
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.core.exceptions import PermissionDenied
+from django.db.models import QuerySet
 from django.http import HttpResponse
 from django.shortcuts import render, redirect, get_object_or_404
 from django.urls import reverse_lazy
@@ -13,6 +14,23 @@ from tracks.forms import ApplicationRecordForm
 from tracks.models import ApplicationRecord, Company
 
 
+def report_statistics(items: QuerySet[ApplicationRecord]):
+    """
+    Displays statistics about the job applications
+    :param items: QuerySet of ApplicationRecord objects
+    :return: a dictionary with the statistics of applications
+    """
+    rejected = ApplicationRecord.objects.filter(outcome__contains="REJECT").count()
+    oa = ApplicationRecord.objects.filter(outcome="OA").count()
+    vo = ApplicationRecord.objects.filter(outcome="VO").count()
+    statistics = {
+        'oa': oa,
+        'rejected': rejected,
+        'vo': vo
+    }
+    return statistics
+
+
 def index(request):
     if not request.user.is_authenticated:
         return redirect('login')
@@ -21,6 +39,8 @@ def index(request):
     # for item in items: print((item.applicant.username, request.user.username))
     # myFilter = facultyFilter(request.GET, queryset=items)
     # items = myFilter.qs
+    statistics = report_statistics(items)
+    logging.info(statistics)
     context = {
         'items': items,
         # 'header': 'faculty',
@@ -84,10 +104,11 @@ def add_application(request):
 
 def companies(request):
     companies = Company.objects.all()
-    context = { "companies": companies }
-    return render(request, 'companies.html',context)
+    context = {"companies": companies}
+    return render(request, 'companies.html', context)
+
 
 def yuanc(request):
     companies = Company.objects.all()
-    context = { "companies": companies }
-    return render(request, 'yuanc.html',context)
+    context = {"companies": companies}
+    return render(request, 'yuanc.html', context)
