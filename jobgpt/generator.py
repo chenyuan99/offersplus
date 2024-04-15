@@ -1,8 +1,8 @@
 import logging
-
+import os
 import openai
 
-openai.api_key = "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"
+openai.api_key = os.environ['OPENAI_API_KEY']
 
 
 def generate_response(prompt: str) -> str:
