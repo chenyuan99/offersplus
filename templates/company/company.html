@@ -1,7 +1,6 @@
 {% extends "dashboard.html" %}
 {% load static %}
 {% block content %}
-    <!-- </nav> -->
     <div class="container ">
         <div class="row">
             <div class="col-md-12">
@@ -18,37 +17,23 @@
                 <th> Manage</th>
             </tr>
             </thead>
-
             <tbody>
-
             {% for item in items %}
                 <tr>
-
                     <td>
                         {{ item.name }}
                     </td>
-
                     <td>
                         {{ item.company_name }}
                     </td>
-
                     <td>
-                        <a href=
-                                   {{ item.application_link }} type="button" class="btn btn-outline-primary btn-sm"
-                        >
-
+                        <a class="btn btn-outline-primary btn-sm" href="view/{{item.name}}/">
                             View
                         </a>
                     </td>
-
-
                 </tr>
-
-
             {% endfor %}
-
             </tbody>
-
         </table>
     </div>
     <br>
