@@ -1,50 +1,47 @@
+import json
 import logging
-import urllib.request, json
+import urllib.request
 from collections import defaultdict
 
 from django.contrib.auth.models import User
-from django.shortcuts import render, redirect
 # Add these imports at the top of your View file
-from django.core.paginator import (
-    Paginator,
-    EmptyPage,
-    PageNotAnInteger,
-)
+from django.core.paginator import EmptyPage, PageNotAnInteger, Paginator
+from django.shortcuts import redirect, render
 
 # Create your views here.
-from tracks.models import Company, ApplicationRecord
+from tracks.models import ApplicationRecord, Company
 
 
 def display_companies(request):
     items = Company.objects.all()
     context = {
-        'items': items,
+        "items": items,
     }
-    return render(request, 'company/company.html', context)
+    return render(request, "company/company.html", context)
 
 
 def display_company(request, company_name):
     if not request.user.is_authenticated:
-        return redirect('login')
+        return redirect("login")
     logging.info(company_name)
-    items = ApplicationRecord.objects.filter(company_name=company_name, applicant=request.user.username)
-    context = {
-        'items': items,
-        'company': company_name
-    }
-    return render(request, 'company/company-detail.html', context)
+    items = ApplicationRecord.objects.filter(
+        company_name=company_name, applicant=request.user.username
+    )
+    context = {"items": items, "company": company_name}
+    return render(request, "company/company-detail.html", context)
 
 
 def display_grace_hopper(request):
-    return render(request, 'company/grace-hopper.html')
+    return render(request, "company/grace-hopper.html")
 
 
 def display_internships(request):
     context = defaultdict()
     items = list()
     with urllib.request.urlopen(
-            "https://raw.githubusercontent.com/SimplifyJobs/Summer2024-Internships/dev/.github/scripts/listings.json") as url:
-        data = json.loads(url.read().decode('utf-8'))
+        "https://raw.githubusercontent.com/SimplifyJobs/Summer2024-Internships/dev/.github/scripts/listings.json"
+    ) as url:
+        data = json.loads(url.read().decode("utf-8"))
         for item in data:
             try:
                 # logging.info(item)
@@ -57,7 +54,7 @@ def display_internships(request):
     # Get page number from request,
     # default to first page
     default_page = 1
-    page = request.GET.get('page', default_page)
+    page = request.GET.get("page", default_page)
 
     items_per_page = 100
     paginator = Paginator(items, items_per_page)
@@ -72,11 +69,13 @@ def display_internships(request):
     # Provide filtered, paginated library items
     context["items_page"] = items_page
 
-    return render(request, 'company/internships.html', context)
+    return render(request, "company/internships.html", context)
 
 
 def display_newgrads(request):
-    with urllib.request.urlopen("http://maps.googleapis.com/maps/api/geocode/json?address=google") as url:
+    with urllib.request.urlopen(
+        "http://maps.googleapis.com/maps/api/geocode/json?address=google"
+    ) as url:
         data = json.load(url)
         logging.info(data)
-    return render(request, 'company/grace-hopper.html')
+    return render(request, "company/grace-hopper.html")

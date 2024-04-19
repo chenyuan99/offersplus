@@ -10,10 +10,10 @@
 # distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF
 # ANY KIND, either express or implied. See the License for the specific
 # language governing permissions and limitations under the License.
-from django.db import models
-from django.contrib.auth.models import User
-from django.utils import timezone
 from django.conf import settings
+from django.contrib.auth.models import User
+from django.db import models
+from django.utils import timezone
 
 # Create your models here.
 from tracks.identifiers import MY_CHOICES
@@ -28,11 +28,15 @@ class ApplicationRecord(models.Model):
     VO_date = models.DateTimeField(null=True, blank=True)
     created = models.DateTimeField(default=timezone.now)
     updated = models.DateTimeField(auto_now=True)
-    applicant = models.ForeignKey(settings.AUTH_USER_MODEL, to_field='username', default='cyuan8',
-                                  on_delete=models.CASCADE)
+    applicant = models.ForeignKey(
+        settings.AUTH_USER_MODEL,
+        to_field="username",
+        default="cyuan8",
+        on_delete=models.CASCADE,
+    )
 
     class Meta:
-        ordering = ('-created',)
+        ordering = ("-created",)
 
     def __str__(self):
         return " ".join([self.job_title, self.company_name, self.outcome])
@@ -41,13 +45,13 @@ class ApplicationRecord(models.Model):
 class Company(models.Model):
     name = models.TextField()
     industry = models.TextField(blank=True)
-    logo = models.ImageField(upload_to='company_logo', blank=True)
+    logo = models.ImageField(upload_to="company_logo", blank=True)
     created = models.DateTimeField(default=timezone.now)
     updated = models.DateTimeField(auto_now=True)
     description = models.TextField(blank=True)
 
     class Meta:
-        ordering = ('-created',)
+        ordering = ("-created",)
 
     def __str__(self):
         return self.name

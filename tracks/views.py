@@ -12,14 +12,15 @@
 # language governing permissions and limitations under the License.
 import logging
 
+from django.contrib import messages
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.core.exceptions import PermissionDenied
+from django.core.paginator import EmptyPage, PageNotAnInteger, Paginator
 from django.db.models import QuerySet
 from django.http import HttpResponse
-from django.shortcuts import render, redirect, get_object_or_404
+from django.shortcuts import get_object_or_404, redirect, render
 from django.urls import reverse_lazy
 from django.views.generic import FormView, TemplateView
-from django.contrib import messages
 
 from tracks.forms import ApplicationRecordForm
 # Create your views here.
@@ -32,95 +33,110 @@ def report_statistics(items: QuerySet[ApplicationRecord]):
     :param items: QuerySet of ApplicationRecord objects
     :return: a dictionary with the statistics of applications
     """
-    rejected = ApplicationRecord.objects.filter(outcome__contains="REJECT").count()
+    rejected = ApplicationRecord.objects.filter(
+        outcome__contains="REJECT"
+    ).count()
     oa = ApplicationRecord.objects.filter(outcome="OA").count()
     vo = ApplicationRecord.objects.filter(outcome="VO").count()
-    statistics = {
-        'oa': oa,
-        'rejected': rejected,
-        'vo': vo
-    }
+    statistics = {"oa": oa, "rejected": rejected, "vo": vo}
     return statistics
 
 
 def index(request):
     if not request.user.is_authenticated:
-        return redirect('login')
+        return redirect("login")
 
-    items = ApplicationRecord.objects.filter(applicant__username=request.user.username)
+    items = ApplicationRecord.objects.filter(
+        applicant__username=request.user.username
+    )
     # for item in items: print((item.applicant.username, request.user.username))
     # myFilter = facultyFilter(request.GET, queryset=items)
     # items = myFilter.qs
     statistics = report_statistics(items)
     logging.info(statistics)
-    context = {
-        'items': items,
-        # 'header': 'faculty',
-        # 'myFilter': myFilter,
-    }
-    return render(request, 'index.html', context)
+
+    # Paginate items
+
+    # Get page number from request,
+    # default to first page
+    default_page = 1
+    page = request.GET.get("page", default_page)
+    items_per_page = 10
+    paginator = Paginator(items, items_per_page)
+    try:
+        items_page = paginator.page(page)
+    except PageNotAnInteger:
+        items_page = paginator.page(default_page)
+    except EmptyPage:
+        items_page = paginator.page(paginator.num_pages)
+    context = {"items_page": items_page, "statistics": statistics}
+    return render(request, "index.html", context)
 
 
 # Pre Post Form related view
 class ApplicationRecordView(LoginRequiredMixin, FormView):
-    template_name = 'tracks/application-record.html'
+    template_name = "tracks/application-record.html"
     form_class = ApplicationRecordForm
-    success_url = reverse_lazy('tracks:success')
+    success_url = reverse_lazy("tracks:success")
 
 
 class ApplicationRecordSuccessView(LoginRequiredMixin, TemplateView):
-    template_name = 'tracks/success.html'
+    template_name = "tracks/success.html"
 
 
 def edit_application(request, id):
     post = get_object_or_404(ApplicationRecord, id=id)
 
-    if request.method == 'GET':
-        context = {'form': ApplicationRecordForm(instance=post), 'id': id}
-        return render(request, 'tracks/application-record.html', context)
+    if request.method == "GET":
+        context = {"form": ApplicationRecordForm(instance=post), "id": id}
+        return render(request, "tracks/application-record.html", context)
 
-    if request.method == 'POST':
+    if request.method == "POST":
         form = ApplicationRecordForm(request.POST, instance=post)
         if form.is_valid():
             form.applicant = request.user.username
             form.save()
-            messages.success(request, 'The post has been updated successfully.')
-            return redirect('index')
+            messages.success(
+                request, "The post has been updated successfully."
+            )
+            return redirect("index")
         else:
-            messages.error(request, 'Please correct the following errors:')
-            return render(request, 'tracks/application-record.html', {'form': form})
+            messages.error(request, "Please correct the following errors:")
+            return render(
+                request, "tracks/application-record.html", {"form": form}
+            )
 
 
 def hardware(request):
-    return render(request, 'hardware.html')
+    return render(request, "hardware.html")
 
 
 # -------------------------add-----------------------------------
 def add_application(request):
     if not request.user.is_authenticated:
         raise PermissionDenied
-    if request.method == 'POST':
+    if request.method == "POST":
         form = ApplicationRecordForm(request.POST, hide_condition=True)
 
         if form.is_valid():
             form.applicant = request.user.username
             logging.info(form)
             form.save()
-            return redirect('index')
+            return redirect("index")
 
     else:
         form = ApplicationRecordForm(hide_condition=True)
-        form.initial['applicant'] = request.user.username
-        return render(request, 'add_new.html', {'form': form})
+        form.initial["applicant"] = request.user.username
+        return render(request, "add_new.html", {"form": form})
 
 
 def companies(request):
     companies = Company.objects.all()
     context = {"companies": companies}
-    return render(request, 'companies.html', context)
+    return render(request, "companies.html", context)
 
 
 def yuanc(request):
     companies = Company.objects.all()
     context = {"companies": companies}
-    return render(request, 'yuanc.html', context)
+    return render(request, "yuanc.html", context)

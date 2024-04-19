@@ -10,12 +10,13 @@
 # distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF
 # ANY KIND, either express or implied. See the License for the specific
 # language governing permissions and limitations under the License.
+import unittest
+from unittest import mock
+
+import requests
 from django.test import TestCase
 
 from company.views import display_internships, display_newgrads
-import requests
-import unittest
-from unittest import mock
 
 
 # This is the class we want to test
@@ -35,9 +36,9 @@ def mocked_requests_get(*args, **kwargs):
         def json(self):
             return self.json_data
 
-    if args[0] == 'http://someurl.com/test.json':
+    if args[0] == "http://someurl.com/test.json":
         return MockResponse({"key1": "value1"}, 200)
-    elif args[0] == 'http://someotherurl.com/anothertest.json':
+    elif args[0] == "http://someotherurl.com/anothertest.json":
         return MockResponse({"key2": "value2"}, 200)
 
     return MockResponse(None, 404)
@@ -47,11 +48,11 @@ def mocked_requests_get(*args, **kwargs):
 class MyGreatClassTestCase(unittest.TestCase):
 
     # We patch 'requests.get' with our own method. The mock object is passed in to our test case method.
-    @mock.patch('requests.get', side_effect=mocked_requests_get)
+    @mock.patch("requests.get", side_effect=mocked_requests_get)
     def test_display_internships(self, mock_get):
         display_internships(mock_get)
 
     # We patch 'requests.get' with our own method. The mock object is passed in to our test case method.
-    @mock.patch('requests.get', side_effect=mocked_requests_get)
+    @mock.patch("requests.get", side_effect=mocked_requests_get)
     def test_display_newgrads(self, mock_get):
         display_newgrads(mock_get)

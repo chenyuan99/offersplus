@@ -15,64 +15,59 @@
 
         {% if items_page %}
 
-                                <table id="info-table" class="table table-hover">
-                    <thead>
+            <table id="info-table" class="table table-hover">
+                <thead>
+                <tr>
+                    <th> Job Title</th>
+                    <th> Company</th>
+                    <th> Link</th>
+
+                    <th> Manage</th>
+                </tr>
+                </thead>
+
+                <tbody>
+                {% for item in items_page %}
+
                     <tr>
-                        <th> Job Title</th>
-                        <th> Company</th>
-                        <th> Link</th>
+                        <td>
+                            {{ item.title }}
+                        </td>
 
-                                        <th> Manage</th>
+                        <td>
+                            <a href="{% url 'company-detail' item.company_name %}">
+
+                                {{ item.company_name }}
+
+                            </a>
+                        </td>
+
+                        <td>
+                            <a href=
+                                       {{ item.url }} type="button" class="btn btn-outline-primary btn-sm"
+                            >
+
+                                View
+                            </a>
+                        </td>
+
+
+                        <td>
+                            <a href=
+                                       ""
+                               type="button" class="btn btn-outline-info btn-sm">
+
+                                Edit
+                            </a>
+                            <a href=
+                                       "" type="button" class="btn btn-outline-danger btn-sm">
+                                Delete
+                            </a>
+
                     </tr>
-                    </thead>
-
-                    <tbody>
-{% for item in items_page %}
-
-                        <tr>
-                            <td>
-                                {{ item.title }}
-                            </td>
-
-                            <td>
-                                <a href="{% url 'company-detail' item.company_name %}">
-
-                                    {{ item.company_name }}
-
-                                </a>
-                            </td>
-
-                            <td>
-                                <a href=
-                                           {{ item.url }} type="button" class="btn btn-outline-primary btn-sm"
-                                >
-
-                                    View
-                                </a>
-                            </td>
-
-
-                            <td>
-                                <a href=
-                                           ""
-                                   type="button" class="btn btn-outline-info btn-sm">
-
-                                    Edit
-                                </a>
-                                <a href=
-                                           "" type="button" class="btn btn-outline-danger btn-sm">
-                                    Delete
-                                </a>
-
-                        </tr>
-
-                    {% endfor %}
-
-                    </tbody>
-
-                                </table>
-
-{#            {% endfor %}#}
+                {% endfor %}
+                </tbody>
+            </table>
 
             {% if items_page.has_other_pages %}
                 <div class="btn-group" role="group" aria-label="Item pagination">
