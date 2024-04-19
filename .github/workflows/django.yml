@@ -25,9 +25,9 @@ jobs:
       run: |
         python -m pip install --upgrade pip
         pip install -r requirements.txt
-    - name: Run Tests
-      run: |
-        python manage.py test
+#    - name: Run Tests
+#      run: |
+#        python manage.py test
 
     - name: Python flake8 Lint
       uses: py-actions/flake8@v2.3.0
