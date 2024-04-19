@@ -19,4 +19,5 @@ MY_CHOICES = (
     ("REJECT(OA)", "REJECT(OA)"),
     ("VO", "VO"),
     ("OA", "OA"),
+    ("OFFER", "OFFER"),
 )

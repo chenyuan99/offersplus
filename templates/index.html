@@ -7,10 +7,10 @@
                 <a href="{% url 'add-application' %}" class="btn btn-outline-primary">Add New Record</a>
 {#                <a href="{% url 'hardware' %}" class="btn btn-outline-info">Hardware Jobs</a>#}
 {#                <a href="https://icc.fyi" class="btn btn-outline-info">IT Consulting Jobs</a>#}
-                <a href="https://icc.fyi" class="btn btn-outline-danger">Rejected {{ statistics.rejected}}</a>
-                <a href="https://icc.fyi" class="btn btn-outline-warning">OA {{ statistics.oa }}</a>
-                <a href="https://icc.fyi" class="btn btn-outline-info">VO {{ statistics.vo }}</a>
-                <a href="https://icc.fyi" class="btn btn-outline-success">Offer {{ statistics.vo }}</a>
+                <a href="/?outcome=rejected" class="btn btn-outline-danger">Rejected {{ statistics.rejected}}</a>
+                <a href="/?outcome=oa" class="btn btn-outline-warning">OA {{ statistics.oa }}</a>
+                <a href="/?outcome=vo" class="btn btn-outline-info">VO {{ statistics.vo }}</a>
+                <a href="/?outcome=offer" class="btn btn-outline-success">Offer {{ statistics.offer }}</a>
             </div>
         </div>
         {% if items_page %}

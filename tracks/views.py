@@ -33,16 +33,15 @@ def report_statistics(items: QuerySet[ApplicationRecord]):
     :param items: QuerySet of ApplicationRecord objects
     :return: a dictionary with the statistics of applications
     """
-    rejected = ApplicationRecord.objects.filter(
-        outcome__contains="REJECT"
-    ).count()
-    oa = ApplicationRecord.objects.filter(outcome="OA").count()
-    vo = ApplicationRecord.objects.filter(outcome="VO").count()
-    statistics = {"oa": oa, "rejected": rejected, "vo": vo}
+    rejected = len(items.filter(outcome__contains="REJECT"))
+    oa = len(items.filter(outcome="OA"))
+    vo = len(items.filter(outcome="VO"))
+    offer = len(items.filter(outcome="OFFER"))
+    statistics = {"oa": oa, "rejected": rejected, "vo": vo, "offer": offer}
     return statistics
 
 
-def index(request):
+def index(request, *args, **kwargs):
     if not request.user.is_authenticated:
         return redirect("login")
 
@@ -54,6 +53,15 @@ def index(request):
     # items = myFilter.qs
     statistics = report_statistics(items)
     logging.info(statistics)
+    logging.info(request.GET.get('outcome'))
+    if request.GET.get('outcome') == "rejected":
+        items = items.filter(outcome__contains="REJECT")
+    elif request.GET.get('outcome') == "oa":
+        items = items.filter(outcome="OA")
+    elif request.GET.get('outcome') == "vo":
+        items = items.filter(outcome="VO")
+    elif request.GET.get('outcome') == "offer":
+        items = items.filter(outcome="OFFER")
 
     # Paginate items
 
@@ -71,6 +79,7 @@ def index(request):
         items_page = paginator.page(paginator.num_pages)
     context = {"items_page": items_page, "statistics": statistics}
     return render(request, "index.html", context)
+
 
 
 # Pre Post Form related view
@@ -112,9 +121,12 @@ def hardware(request):
 
 
 # -------------------------add-----------------------------------
-def add_application(request):
+def add_application(request, *args, **kwargs):
     if not request.user.is_authenticated:
         raise PermissionDenied
+
+    logging.info(request.GET.get('company'))
+
     if request.method == "POST":
         form = ApplicationRecordForm(request.POST, hide_condition=True)
 
@@ -127,6 +139,8 @@ def add_application(request):
     else:
         form = ApplicationRecordForm(hide_condition=True)
         form.initial["applicant"] = request.user.username
+        form.initial["outcome"] = "TO DO"
+        if request.GET.get('company'): form.initial["company_name"] = request.GET.get('company')
         return render(request, "add_new.html", {"form": form})
 
 
