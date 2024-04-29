@@ -31,11 +31,11 @@ jobs:
       run: |
         python manage.py test
 
-    - name: Python flake8 Lint
-      uses: py-actions/flake8@v2.3.0
-
     - name: Upload coverage reports to Codecov
       uses: codecov/codecov-action@v4.0.1
       with:
         token: ${{ secrets.CODECOV_TOKEN }}
+
+    - name: Python flake8 Lint
+      uses: py-actions/flake8@v2.3.0
 
