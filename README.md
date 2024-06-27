@@ -1,4 +1,4 @@
-# offer-plus
+# offersplus
 An Offer seeker powered by GPT
 
 ![example workflow](https://github.com/chenyuan99/offer-plus/actions/workflows/django.yml/badge.svg)
