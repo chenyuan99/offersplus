@@ -43,7 +43,7 @@ def report_statistics(items: QuerySet[ApplicationRecord]):
 
 def index(request, *args, **kwargs):
     if not request.user.is_authenticated:
-        return redirect("login")
+        return render(request, "landing-page.html")
 
     items = ApplicationRecord.objects.filter(
         applicant__username=request.user.username
