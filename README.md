@@ -14,6 +14,10 @@ https://easyatschecker.streamlit.app/
 2. Internship
 3. icc.fyi
 
+## License
+
+Open Code Only, No Commercial Use allowed.
+
 ## Reference
 
 https://www.bilibili.com/video/BV1BN411D73i/?spm_id_from=333.999.0.0&vd_source=cdc8383991bc95a3b4742f982fc72004
