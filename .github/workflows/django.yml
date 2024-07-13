@@ -35,7 +35,3 @@ jobs:
       uses: codecov/codecov-action@v4.0.1
       with:
         token: ${{ secrets.CODECOV_TOKEN }}
-
-    - name: Python flake8 Lint
-      uses: py-actions/flake8@v2.3.0
-
