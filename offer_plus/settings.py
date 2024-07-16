@@ -36,6 +36,7 @@ ALLOWED_HOSTS = [
     "[::1]",
     "offer-plus.herokuapp.com",
     "offersplus.xyz",
+    "https://offersplus.xyz"
 ]
 
 # Application definition
