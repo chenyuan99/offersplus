@@ -39,6 +39,8 @@ ALLOWED_HOSTS = [
     "https://offersplus.xyz"
 ]
 
+CSRF_TRUSTED_ORIGINS = ["https://offersplus.xyz"]
+
 # Application definition
 
 INSTALLED_APPS = [
