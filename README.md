@@ -4,6 +4,12 @@ An Offer seeker powered by GPT
 
 ![example workflow](https://github.com/chenyuan99/offer-plus/actions/workflows/django.yml/badge.svg)
 
+## Team
+
+Project Owner & Tech Lead: Yuan Chen
+
+Software Engineer: Jingyu Xiong
+
 ## ATS Parsing
 
 https://easyatschecker.streamlit.app/
@@ -26,11 +32,6 @@ River Mall: https://riversmall.com/
 
 ## Acknowledgement
 
-<div class="row text-center">
-    <div class="col">
-        <a href="https://www.buymeacoffee.com/ivanchen"><img
-                src="https://img.buymeacoffee.com/button-api/?text=Buy me a coffee&emoji=&slug=ivanchen&button_colour=FFDD00&font_colour=000000&font_family=Cookie&outline_colour=000000&coffee_colour=ffffff"/></a>
-    </div>
     <div class="col">
         <a href="https://www.producthunt.com/products/offers-plus?utm_source=badge-follow&utm_medium=badge&utm_souce=badge-offers&#0045;plus"
            target="_blank"><img
