@@ -1,0 +1,12 @@
+{% extends "base.html" %}
+{% load static %}
+{% block content %}
+    <div class="container">
+        <script type='module'
+                src='https://bigdataanalyticspub-sb.uscis.dhs.gov/javascripts/api/tableau.embedding.3.latest.min.js'></script>
+        <tableau-viz id='tableau-viz'
+                     src='https://bigdataanalyticspub-sb.uscis.dhs.gov/views/H1BEmployerDataHub-Final/H1B-EmployerDataHub'
+                     hide-tabs toolbar='bottom' device='default'></tableau-viz>
+
+    </div>
+{% endblock %}

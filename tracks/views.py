@@ -119,6 +119,9 @@ def edit_application(request, id):
 def hardware(request):
     return render(request, "hardware.html")
 
+def display_h1b(request):
+    return render(request, "h1b.html")
+
 
 # -------------------------add-----------------------------------
 def add_application(request, *args, **kwargs):
