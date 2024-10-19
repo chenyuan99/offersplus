@@ -2,7 +2,7 @@
 
 An Offer seeker powered by GPT
 
-![example workflow](https://github.com/chenyuan99/offer-plus/actions/workflows/django.yml/badge.svg)
+![example workflow](https://github.com/chenyuan99/offer-plus/actions/workflows/django.yml/badge.svg) [![](https://dcbadge.limes.pink/api/server/X24GHUwtHW?style=flat)](https://discord.gg/X24GHUwtHW?style=flat)
 
 ## Team
 
